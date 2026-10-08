@@ -3,8 +3,16 @@
 <%@include file="lib/header.jsp" %>
 
 <h2>Registrar producto / servicio</h2>
+<%
+    String error = request.getParameter("error");
+    if ("duplicado".equals(error)) {
+%>
+<p style="color:#b00020; font-weight:600;">Ya existe un producto con ese código. Usa otro.</p>
+<% } else if ("numero".equals(error)) { %>
+<p style="color:#b00020; font-weight:600;">Revisa la potencia y el precio: deben ser solo números.</p>
+<% } %>
 <div class="tarjeta formulario">
-    <form action="#" method="post">
+    <form action="ProductoServlet" method="post">
         <label for="idProducto">C&oacute;digo</label>
         <input type="number" id="idProducto" name="idProducto" required>
 

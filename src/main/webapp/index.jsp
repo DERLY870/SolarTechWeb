@@ -24,7 +24,7 @@
     <div class="tarjeta">
         <h3>Productos y servicios</h3>
         <p>Cat&aacute;logo de paneles, inversores y servicios de instalaci&oacute;n y mantenimiento.</p>
-        <a class="boton" href="adminProductos.jsp">Ver productos</a>
+        <a class="boton" href="ProductoServlet">Ver productos</a>
     </div>
     <div class="tarjeta">
         <h3>Acceso</h3>

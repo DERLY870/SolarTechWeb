@@ -30,7 +30,7 @@
                 <a href="<%= ctx%>/login.jsp">Ingresar</a>
                 <a href="<%= ctx %>/UsuarioServlet">Usuarios</a>
                 <a href="<%= ctx%>/registroUsuarios.jsp">Nuevo usuario</a>
-                <a href="<%= ctx%>/adminProductos.jsp">Productos</a>
+                <a href="<%= ctx%>/ProductoServlet">Productos</a>
                 <a href="<%= ctx%>/registroProductos.jsp">Nuevo producto</a>
             </nav>
         </div>
