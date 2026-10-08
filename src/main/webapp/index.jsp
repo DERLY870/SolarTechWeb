@@ -19,7 +19,7 @@
     <div class="tarjeta">
         <h3>Usuarios</h3>
         <p>Administraci&oacute;n de administradores, t&eacute;cnicos y supervisores del sistema.</p>
-        <a class="boton" href="adminUsuarios.jsp">Ver usuarios</a>
+        <a class="boton" href="UsuarioServlet">Ver usuarios</a>
     </div>
     <div class="tarjeta">
         <h3>Productos y servicios</h3>

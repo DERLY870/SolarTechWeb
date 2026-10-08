@@ -4,7 +4,7 @@
 
 <h2>Registrar nuevo usuario</h2>
 <div class="tarjeta formulario">
-    <form action="#" method="post">
+    <form action="UsuarioServlet" method="post"></form>
         <label for="idUsuario">Identificaci&oacute;n</label>
         <input type="number" id="idUsuario" name="idUsuario" required>
 
