@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Servlets;
+
 import Modelo.GestionarUsuarios;
 import Modelo.Usuario;
 import jakarta.servlet.ServletException;
@@ -11,12 +8,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-/**
- *
- * @author usuario
- */
-
-
 
 @WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
 public class UsuarioServlet extends HttpServlet {
@@ -25,12 +16,14 @@ public class UsuarioServlet extends HttpServlet {
         return (GestionarUsuarios) getServletContext().getAttribute("gestionUsuarios");
     }
 
-    // GET: listar usuarios o eliminar uno (?accion=eliminar&id=...)
+    // GET: listar, eliminar (?accion=eliminar&id=...) o editar (?accion=editar&id=...)
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if ("eliminar".equals(request.getParameter("accion"))) {
+        String accion = request.getParameter("accion");
+
+        if ("eliminar".equals(accion)) {
             try {
                 gestor().eliminar(Integer.parseInt(request.getParameter("id")));
             } catch (NumberFormatException e) {
@@ -40,11 +33,26 @@ public class UsuarioServlet extends HttpServlet {
             return;
         }
 
+        if ("editar".equals(accion)) {
+            try {
+                Usuario u = gestor().buscarPorId(Integer.parseInt(request.getParameter("id")));
+                if (u != null) {
+                    request.setAttribute("usuarioEditar", u);
+                    request.getRequestDispatcher("registroUsuarios.jsp").forward(request, response);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                // id inválido: se vuelve a la lista
+            }
+            response.sendRedirect("UsuarioServlet");
+            return;
+        }
+
         request.setAttribute("usuarios", gestor().listar());
         request.getRequestDispatcher("adminUsuarios.jsp").forward(request, response);
     }
 
-    // POST: registrar un usuario nuevo
+    // POST: registrar un usuario nuevo o actualizar uno existente
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,23 +60,42 @@ public class UsuarioServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         try {
             int id = Integer.parseInt(request.getParameter("idUsuario"));
+
+            if ("actualizar".equals(request.getParameter("accion"))) {
+                Usuario existente = gestor().buscarPorId(id);
+                if (existente != null) {
+                    String contrasena = request.getParameter("contrasena");
+                    if (contrasena == null || contrasena.isEmpty()) {
+                        contrasena = existente.getContrasena(); // se conserva la actual
+                    }
+                    gestor().actualizar(new Usuario(
+                            id,
+                            request.getParameter("nombre"),
+                            request.getParameter("correo"),
+                            request.getParameter("rol"),
+                            contrasena,
+                            request.getParameter("estado")));
+                }
+                response.sendRedirect("UsuarioServlet");
+                return;
+            }
+
             if (gestor().buscarPorId(id) != null) {
                 response.sendRedirect("registroUsuarios.jsp"); // id repetido
                 return;
             }
-            Usuario u = new Usuario(
+            gestor().agregar(new Usuario(
                     id,
                     request.getParameter("nombre"),
                     request.getParameter("correo"),
                     request.getParameter("rol"),
                     request.getParameter("contrasena"),
-                    request.getParameter("estado"));
-            gestor().agregar(u);
+                    request.getParameter("estado")));
         } catch (NumberFormatException e) {
             response.sendRedirect("registroUsuarios.jsp");
             return;
         }
         response.sendRedirect("UsuarioServlet");
     }
-}   
+}  
 

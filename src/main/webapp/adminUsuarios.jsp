@@ -29,6 +29,7 @@
             <td><%= u.getRol()%></td>
             <td><%= u.getEstado()%></td>
             <td class="acciones">
+                <a href="UsuarioServlet?accion=editar&id=<%= u.getIdUsuario()%>">Editar</a>
                 <a href="UsuarioServlet?accion=eliminar&id=<%= u.getIdUsuario()%>"
                    data-confirmar="¿Eliminar este usuario?">Eliminar</a>
             </td>
