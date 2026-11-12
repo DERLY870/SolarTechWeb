@@ -3,8 +3,15 @@
 <%@include file="lib/header.jsp" %>
 
 <h2>Ingreso a la aplicaci&oacute;n</h2>
+
+<% if (request.getParameter("error") != null) { %>
+<p class="alerta-error">Correo o contraseña incorrectos, o usuario inactivo.</p>
+<% } %>
+<% if (request.getParameter("registrado") != null) { %>
+<p class="alerta-exito">Cuenta creada. Ya puedes ingresar.</p>
+<% } %>
 <div class="tarjeta formulario">
-    <form action="#" method="post">
+    <form action="LoginServlet" method="post">
         <label for="correo">Correo electr&oacute;nico</label>
         <input type="email" id="correo" name="correo" placeholder="usuario@solartech.com" required>
 

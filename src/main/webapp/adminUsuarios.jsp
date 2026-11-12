@@ -12,12 +12,16 @@
 <%@include file="lib/header.jsp" %>
 
 <h2>Administración de usuarios</h2>
+
+<% if (esAdmin) { %>
 <p><a class="boton acento" href="registroUsuarios.jsp">+ Nuevo usuario</a></p>
+<% } %>
 
 <table>
     <thead>
         <tr>
-            <th>ID</th><th>Nombre</th><th>Correo</th><th>Rol</th><th>Estado</th><th>Acciones</th>
+            <th>ID</th><th>Nombre</th><th>Correo</th><th>Rol</th><th>Estado</th>
+            <% if (esAdmin) { %><th>Acciones</th><% } %>
         </tr>
     </thead>
     <tbody>
@@ -28,11 +32,13 @@
             <td><%= u.getCorreo()%></td>
             <td><%= u.getRol()%></td>
             <td><%= u.getEstado()%></td>
+            <% if (esAdmin) { %>
             <td class="acciones">
                 <a href="UsuarioServlet?accion=editar&id=<%= u.getIdUsuario()%>">Editar</a>
                 <a href="UsuarioServlet?accion=eliminar&id=<%= u.getIdUsuario()%>"
                    data-confirmar="¿Eliminar este usuario?">Eliminar</a>
             </td>
+            <% } %>
         </tr>
         <% }%>
     </tbody>

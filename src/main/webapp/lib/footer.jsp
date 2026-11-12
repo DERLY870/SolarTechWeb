@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
         </main>
 
-        <div id="modalConfirmar" class="modal-fondo">
+        <div id="modalConfirmar" class="modal-fondo" style="display: none;">
             <div class="modal-caja">
                 <h3>SolarTech</h3>
                 <p id="modalTexto"></p>

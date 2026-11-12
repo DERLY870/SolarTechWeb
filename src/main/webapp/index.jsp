@@ -26,11 +26,7 @@
         <p>Cat&aacute;logo de paneles, inversores y servicios de instalaci&oacute;n y mantenimiento.</p>
         <a class="boton" href="ProductoServlet">Ver productos</a>
     </div>
-    <div class="tarjeta">
-        <h3>Acceso</h3>
-        <p>Ingresa con tu correo y contrase&ntilde;a para usar la aplicaci&oacute;n.</p>
-        <a class="boton acento" href="login.jsp">Ingresar</a>
-    </div>
+   
 </div>
 
 <%@include file="lib/footer.jsp" %>
