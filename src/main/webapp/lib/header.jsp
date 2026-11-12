@@ -23,9 +23,10 @@
     <body>
         <header>
             <div class="contenedor-header" style="max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                <a href="<%= ctx%>/index.jsp" style="font-size: 1.3rem; font-weight: 700; color: #f59e0b; margin: 0;">
-                    ☀ SolarTech
-                </a>
+                <a href="<%= ctx%>/index.jsp" style="display: flex; align-items: center; gap: 0.6rem; font-size: 1.3rem; font-weight: 700; color: #f59e0b; margin: 0;">
+    <img src="<%= ctx%>/images/logo.png" alt="Logo SolarTech" style="height: 44px; width: auto; border-radius: 6px; background: white; padding: 2px;">
+    <span>SolarTech</span>
+</a>
                 <nav style="background: none; box-shadow: none; padding: 0;">
                     <a href="<%= ctx%>/index.jsp">Inicio</a>
                     <% if (!logueado) { %>
